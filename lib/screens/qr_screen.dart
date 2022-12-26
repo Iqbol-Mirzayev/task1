@@ -26,6 +26,7 @@ class _QRViewExampleState extends State<QRViewExample> {
                 builder: (context) => HomePage(),
               ),
               (route) => false);
+          
         },
       ),
       appBar: AppBar(),
@@ -34,7 +35,6 @@ class _QRViewExampleState extends State<QRViewExample> {
   }
 
   Widget _buildQrView(BuildContext context) {
-    // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
         ? 150.0
@@ -43,7 +43,7 @@ class _QRViewExampleState extends State<QRViewExample> {
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
-          borderColor: Colors.red,
+          borderColor: Colors.white,
           borderRadius: 0,
           borderLength: 30,
           borderWidth: 10,
@@ -59,6 +59,7 @@ class _QRViewExampleState extends State<QRViewExample> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        controller.pauseCamera();
       });
     });
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:taska/core/constants.dart';
-import 'package:taska/screens/bottom_sheet.dart';
+import 'package:taska/screens/widgets/bottom_sheet.dart';
 import 'package:taska/screens/qr_screen.dart';
 
 class HomePage extends StatefulWidget {
