@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:taska/cubit/cubit/qr_cubit.dart';
 import 'package:taska/screens/home_page.dart';
 
 class QRViewExample extends StatefulWidget {
@@ -18,19 +20,15 @@ class _QRViewExampleState extends State<QRViewExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-              (route) => false);
-          
+      
+      body: BlocBuilder<QrCubit, QrState>(
+        builder: (context, state) {
+          if (state is QrOpen) {
+            return _buildQrView(context);
+          }
+          return const SizedBox();
         },
       ),
-      appBar: AppBar(),
-      body: _buildQrView(context),
     );
   }
 
@@ -57,10 +55,13 @@ class _QRViewExampleState extends State<QRViewExample> {
       this.controller = controller;
     });
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-        controller.pauseCamera();
-      });
+      result = scanData;
+      context.read<QrCubit>().changeState(QrSuccess());
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
     });
   }
 
@@ -75,7 +76,7 @@ class _QRViewExampleState extends State<QRViewExample> {
 
   @override
   void dispose() {
-    controller?.dispose();
+    controller!.dispose();
     super.dispose();
   }
 }

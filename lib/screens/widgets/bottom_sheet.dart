@@ -15,7 +15,7 @@ class BottomSheetExample extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(32),
                         topRight: Radius.circular(32)),
@@ -24,8 +24,8 @@ class BottomSheetExample extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 170),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 170),
                       child:
                           Divider(color: Colors.black, height: 2, thickness: 3),
                     ),
@@ -35,14 +35,14 @@ class BottomSheetExample extends StatelessWidget {
                         maxRadius: 40,
                         child: Image.asset("assets/profile_icon.png"),
                       ),
-                      title: Text(
+                      title: const Text(
                         "Bobobek Turdiyev",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.5),
                       ),
-                      subtitle: Text(
+                      subtitle: const Text(
                         "+998 66 230 00 15",
                         style: TextStyle(fontSize: 14, color: Colors.grey),
                       ),
@@ -63,9 +63,10 @@ class BottomSheetExample extends StatelessWidget {
                         keyboardType: const TextInputType.numberWithOptions(),
                         decoration: InputDecoration(
                           focusColor: MyColors.colorEF476F,
-                          
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(color: MyColors.colorEF476F, style: BorderStyle.solid),
+                            borderSide: BorderSide(
+                                color: MyColors.colorEF476F,
+                                style: BorderStyle.solid),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           hintText: "Kerakli summani kiriting ...",
